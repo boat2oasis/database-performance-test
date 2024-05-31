@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.service.mall.mapper.ProductsMapper">
+    <insert id="insertProducts">
+        INSERT INTO products (product_name, category_id,description,price,stock,image_url)
+        VALUES
+        <foreach collection ="products" item="product" separator =",">
+            (
+            #{product.productName}, 
+            #{product.categoryId},
+            #{product.description},
+            #{product.price},
+            #{product.stock},
+            #{product.imageUrl}
+            )
+        </foreach>
+    </insert>
+</mapper>

@@ -1,0 +1,15 @@
+/api/*.log
+/api/target/
+/services/target/
+.idea/
+*.log
+target/
+
+### JRebel ###
+/rebel.xml
+/rebel-remote.xml
+
+.project
+.settings/
+.classpath
+.factorypath

@@ -1,5 +1,6 @@
 package com.service.mall;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -37,9 +38,9 @@ public class MallApplicationTests {
 			while (true) {
 				index++;
 
-				//synchronized (this) {
+				synchronized (this) {
 					totalnum++;
-				//}
+				}
 
 				if (totalnum > 5000000 && doList.size() == 0) {
 					long end = System.currentTimeMillis();
@@ -54,17 +55,22 @@ public class MallApplicationTests {
 					break;
 				} else {
 					Products products = new Products();
+					products.setProductId(totalnum);
 					products.setCategoryId(UUID.randomUUID().toString().replace("-", ""));
 					products.setDescription(UUID.randomUUID().toString().replace("-", ""));
 					products.setImageUrl(UUID.randomUUID().toString().replace("-", ""));
 					products.setPrice(UUID.randomUUID().toString().replace("-", ""));
 					products.setProductName(UUID.randomUUID().toString().replace("-", ""));
 					products.setStock(10);
+					products.setCreatedAt(LocalDateTime.now());
+					products.setUpdatedAt(LocalDateTime.now());
 					doList.add(products);
-
+					productsMapper.insert(products);
+					
+					System.out.println(index);
 					if (index == 5000) {
-						productsMapper.insertProducts(doList);
-						//System.out.println();
+						//productsMapper.insertProducts(doList);
+						System.out.println(index);
 						index = 0;
 						doList = new ArrayList<>();
 					}

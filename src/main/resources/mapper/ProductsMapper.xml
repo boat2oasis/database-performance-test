@@ -3,18 +3,26 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.service.mall.mapper.ProductsMapper">
-    <insert id="insertProducts">
-        INSERT INTO products (product_name, category_id,description,price,stock,image_url)
-        VALUES
-        <foreach collection ="products" item="product" separator =",">
-            (
-            #{product.productName}, 
-            #{product.categoryId},
-            #{product.description},
-            #{product.price},
-            #{product.stock},
-            #{product.imageUrl}
-            )
-        </foreach>
-    </insert>
+	<insert id="insertProducts">
+		insert all
+		<foreach collection="products" item="item" index="index">
+			into products
+			(
+			product_id, product_name, category_id, description, price, stock, image_url,
+			created_at, updated_at
+			)
+			values(
+			#{item.productId,jdbcType=INTEGER},
+			#{item.productName,jdbcType=VARCHAR},
+			#{item.categoryId,jdbcType=VARCHAR},
+			#{item.description,jdbcType=VARCHAR},
+			#{item.price,jdbcType=VARCHAR},
+			#{item.stock,jdbcType=INTEGER},
+			#{item.imageUrl,jdbcType=VARCHAR},
+			#{item.createdAt,jdbcType=TIMESTAMP},
+			#{item.updatedAt,jdbcType=TIMESTAMP})
+		</foreach>
+		select 1 from dual
+	</insert>
+
 </mapper>

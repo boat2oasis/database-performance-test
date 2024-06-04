@@ -16,14 +16,15 @@ import com.service.mall.mapper.ProductsMapper;
 
 @SpringBootTest
 @MapperScan("com.service.mall.mapper")
-public class MallApplicationTests {
+public class SynchronizedTest {
+
 
 	@Autowired
 	private ProductsMapper productsMapper;
 	@Autowired
 	private ExecutorService threadPoolExecutor;
 
-	private Integer totalnum = 5600000;
+	private Integer totalnum = 0;
 
 	@Test
 	public void testSelect() {
@@ -42,16 +43,16 @@ public class MallApplicationTests {
 					totalnum++;
 				}
 
-				if (totalnum > 11000000 && doList.size() == 0) {
+				if (totalnum > 5000000 && doList.size() == 0) {
 					long end = System.currentTimeMillis();
-					System.out.println("一共运行的时间是:" + (end - start));
+					//System.out.println("一共运行的时间是:" + (end - start));
 					break;
 				}
 
-				if (totalnum > 11000000 && doList.size() > 0) {
+				if (totalnum > 5000000 && doList.size() > 0) {
 					long end = System.currentTimeMillis();
-					System.out.println("一共运行的时间是:" + (end - start));
-					//productsMapper.insertProducts(doList);
+					//System.out.println("一共运行的时间是:" + (end - start));
+					productsMapper.insertProducts(doList);
 					break;
 				} else {
 					Products products = new Products();
@@ -66,17 +67,17 @@ public class MallApplicationTests {
 					products.setUpdatedAt(LocalDateTime.now());
 					System.out.println(totalnum);
 					doList.add(products);
-					//productsMapper.insertBatchSomeColumn(products);
+					//productsMapper.insert(products);
 					
-					System.out.println(index);
-					if (index == 500) {
+					//System.out.println(index);
+					if (index == 1) {
 						try {
 							productsMapper.insertProducts(doList);
 						}catch(Exception e) {
 							e.printStackTrace();
 						}
 						//productsMapper.insertProducts(doList);
-						System.out.println(index);
+						//System.out.println(index);
 						index = 0;
 						doList = new ArrayList<>();
 					}
@@ -94,4 +95,5 @@ public class MallApplicationTests {
 		}
 
 	}
+
 }

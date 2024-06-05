@@ -41,13 +41,13 @@ public class MallApplicationTests {
 					totalnum++;
 				//}
 
-				if (totalnum > 5000000 && doList.size() == 0) {
+				if (totalnum > 20000000 && doList.size() == 0) {
 					long end = System.currentTimeMillis();
 					System.out.println("一共运行的时间是:" + (end - start));
 					break;
 				}
 
-				if (totalnum > 5000000 && doList.size() > 0) {
+				if (totalnum > 20000000 && doList.size() > 0) {
 					long end = System.currentTimeMillis();
 					System.out.println("一共运行的时间是:" + (end - start));
 					productsMapper.insertProducts(doList);

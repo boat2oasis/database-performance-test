@@ -23,7 +23,7 @@ public class MallApplicationTests {
 	@Autowired
 	private ExecutorService threadPoolExecutor;
 
-	private Integer totalnum = 5600000;
+	private Integer totalnum = 33462490;
 
 	@Test
 	public void testSelect() {
@@ -42,13 +42,13 @@ public class MallApplicationTests {
 					totalnum++;
 				}
 
-				if (totalnum > 11000000 && doList.size() == 0) {
+				if (totalnum > 110000000 && doList.size() == 0) {
 					long end = System.currentTimeMillis();
 					System.out.println("一共运行的时间是:" + (end - start));
 					break;
 				}
 
-				if (totalnum > 11000000 && doList.size() > 0) {
+				if (totalnum > 110000000 && doList.size() > 0) {
 					long end = System.currentTimeMillis();
 					System.out.println("一共运行的时间是:" + (end - start));
 					//productsMapper.insertProducts(doList);

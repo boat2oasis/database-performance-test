@@ -4,5 +4,22 @@ spring:
     url: jdbc:mysql://localhost:3306/boss?useSSL=false&autoReconnect=true&characterEncoding=utf8
     username: root
     password: root
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: mall
+    password: mall
+    virtual-host: mall
+  data:
+    redis:
+      timeout: 5000
+      sentinel:
+        master: mymaster
+        nodes: 127.0.0.1:6381
+        #password: Aini10000nian!
+      password: Aini10000nian!
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
+logging:
+  # 设置logback.xml位置
+  config: classpath:log/logback.xml
